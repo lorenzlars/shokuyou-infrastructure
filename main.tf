@@ -52,7 +52,7 @@ resource "heroku_app" "shokuyou_frontend" {
   acm        = true
   buildpacks = ["heroku/nodejs"]
   config_vars = {
-    API_URL = "https://${local.backend_hostname}/"
+    VITE_API_URL = "https://${local.backend_hostname}/"
   }
   name   = "shokuyou-frontend"
   region = "eu"
