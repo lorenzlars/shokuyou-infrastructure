@@ -59,6 +59,13 @@ resource "heroku_app" "shokuyou_frontend" {
   stack  = "heroku-24"
 }
 
+# Configure database
+
+resource "heroku_addon" "database" {
+  app_id = heroku_app.shokuyou_backend.id
+  plan   = "heroku-postgresql:essential-0"
+}
+
 # Configure domains
 
 resource "heroku_domain" "shokuyou_backend" {
