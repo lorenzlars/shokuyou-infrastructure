@@ -1,0 +1,7 @@
+.envrc
+
+.terraform
+*.hcl
+*.tfvars
+*.tfstate
+*.backup
