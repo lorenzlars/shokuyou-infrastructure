@@ -30,6 +30,10 @@ variable "cloudflare_api_token" {
   description = "Cloudflare Account Api Token"
 }
 
+variable "backend_secret" {
+  description = "Backend JWT secret"
+}
+
 provider "heroku" {
   api_key = var.heroku_api_key
 }
@@ -43,9 +47,12 @@ provider "cloudflare" {
 resource "heroku_app" "shokuyou_backend" {
   acm        = true
   buildpacks = ["heroku/nodejs"]
-  name       = "shokuyou-backend"
-  region     = "eu"
-  stack      = "heroku-24"
+  config_vars = {
+    SECRET = var.backend_secret
+  }
+  name   = "shokuyou-backend"
+  region = "eu"
+  stack  = "heroku-24"
 }
 
 resource "heroku_app" "shokuyou_frontend" {
