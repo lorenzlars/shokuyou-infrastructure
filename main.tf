@@ -34,6 +34,10 @@ variable "backend_secret" {
   description = "Backend JWT secret"
 }
 
+variable "cloudinary_cloud_name" {
+  description = "Cloudinary Cloud Name"
+}
+
 provider "heroku" {
   api_key = var.heroku_api_key
 }
@@ -48,7 +52,8 @@ resource "heroku_app" "shokuyou_backend" {
   acm        = true
   buildpacks = ["heroku/nodejs"]
   config_vars = {
-    SECRET = var.backend_secret
+    SECRET                = var.backend_secret
+    CLOUDINARY_CLOUD_NAME = var.cloudinary_cloud_name
   }
   name   = "shokuyou-backend"
   region = "eu"
@@ -71,11 +76,16 @@ resource "heroku_app_feature" "shokuyou_frontend-routing" {
   name   = "http-routing-2-dot-0"
 }
 
-# Configure database
+# Configure addons
 
 resource "heroku_addon" "database" {
   app_id = heroku_app.shokuyou_backend.id
   plan   = "heroku-postgresql:essential-0"
+}
+
+resource "heroku_addon" "cloudinary" {
+  app_id = heroku_app.shokuyou_backend.id
+  plan   = "cloudinary"
 }
 
 # Configure domains
