@@ -5,3 +5,5 @@
 *.tfvars
 *.tfstate
 *.backup
+
+.idea
