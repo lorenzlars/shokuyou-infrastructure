@@ -6,7 +6,7 @@ resource "heroku_app" "shokuyou_backend" {
   }
   name   = "shokuyou-backend"
   region = "eu"
-  stack  = "heroku-24"
+  stack  = "container"
 }
 
 # Configure addons
