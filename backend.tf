@@ -1,6 +1,5 @@
 resource "heroku_app" "shokuyou_backend" {
   acm = true
-  buildpacks = ["heroku/nodejs"]
   config_vars = {
     SECRET = local.secrets.backend_secret
   }
