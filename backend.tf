@@ -2,8 +2,7 @@ resource "heroku_app" "shokuyou_backend" {
   acm = true
   buildpacks = ["heroku/nodejs"]
   config_vars = {
-    SECRET                = local.secrets.backend_secret
-    CLOUDINARY_CLOUD_NAME = var.cloudinary_cloud_name
+    SECRET = local.secrets.backend_secret
   }
   name   = "shokuyou-backend"
   region = "eu"
@@ -15,11 +14,6 @@ resource "heroku_app" "shokuyou_backend" {
 resource "heroku_addon" "database" {
   app_id = heroku_app.shokuyou_backend.id
   plan   = "heroku-postgresql:essential-0"
-}
-
-resource "heroku_addon" "cloudinary" {
-  app_id = heroku_app.shokuyou_backend.id
-  plan   = "cloudinary"
 }
 
 # Configure domain
