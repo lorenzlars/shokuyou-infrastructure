@@ -1,7 +1,7 @@
 resource "heroku_app" "shokuyou_backend" {
   acm = true
   config_vars = {
-    SECRET = local.secrets.backend_secret
+    JWT_SECRET = local.secrets.backend_secret
   }
   name   = "shokuyou-backend"
   region = "eu"
